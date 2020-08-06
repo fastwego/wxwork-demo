@@ -2,6 +2,8 @@ package main
 
 import (
 	"context"
+	"github.com/fastwego/wechat4work-demo/calendar"
+	"github.com/fastwego/wechat4work-demo/contact"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -13,7 +15,7 @@ import (
 
 	"github.com/fastwego/wechat4work/corporation"
 
-	"github.com/fastwego/offiaccount/type/type_message"
+	"github.com/fastwego/wechat4work/corporation/type/type_message"
 
 	"github.com/spf13/viper"
 
@@ -76,6 +78,9 @@ func main() {
 		ContactApp.Server.EchoStr(c.Writer, c.Request)
 	})
 	router.POST("/api/weixin/contact", HandleMessage)
+
+	router.GET("/api/weixin/demo", contact.Demo)
+	router.GET("/api/weixin/calendar", calendar.Demo)
 
 	svr := &http.Server{
 		Addr:    viper.GetString("LISTEN"),
