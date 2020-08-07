@@ -4,7 +4,6 @@ import (
 	"context"
 	"github.com/fastwego/wechat4work-demo/calendar"
 	"github.com/fastwego/wechat4work-demo/contact"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -41,10 +40,7 @@ func init() {
 
 func HandleMessage(c *gin.Context) {
 
-	body, _ := ioutil.ReadAll(c.Request.Body)
-	log.Println(string(body))
-
-	message, err := ContactApp.Server.ParseXML(body)
+	message, err := ContactApp.Server.ParseXML(c.Request)
 	if err != nil {
 		log.Println(err)
 	}
@@ -66,7 +62,7 @@ func HandleMessage(c *gin.Context) {
 		}
 	}
 
-	ContactApp.Server.Response(c.Writer, c.Request, output)
+	_ = ContactApp.Server.Response(c.Writer, c.Request, output)
 }
 
 func main() {

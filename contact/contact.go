@@ -29,6 +29,7 @@ func init() {
 func Demo(c *gin.Context) {
 
 	params := url.Values{}
+	params.Add("department_id", "10086")
 	resp, err := contact.UserList(ContactApp, params)
 
 	c.Writer.Write(resp)
