@@ -1,8 +1,8 @@
 package calendar
 
 import (
-	"github.com/fastwego/wechat4work/corporation"
-	"github.com/fastwego/wechat4work/corporation/apis/calendar"
+	"github.com/fastwego/wxwork/corporation"
+	"github.com/fastwego/wxwork/corporation/apis/calendar"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
 )
@@ -15,7 +15,7 @@ func init() {
 	viper.SetConfigFile(".env")
 	_ = viper.ReadInConfig()
 
-	Corp = corporation.New(corporation.CorporationConfig{Corpid: viper.GetString("CROPID")})
+	Corp = corporation.New(corporation.Config{Corpid: viper.GetString("CROPID")})
 	CalendarApp = Corp.NewApp(corporation.AppConfig{
 		Secret:         viper.GetString("CalendarSECRET"),
 	})

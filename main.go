@@ -2,8 +2,8 @@ package main
 
 import (
 	"context"
-	"github.com/fastwego/wechat4work-demo/calendar"
-	"github.com/fastwego/wechat4work-demo/contact"
+	"github.com/fastwego/wxwork-demo/calendar"
+	"github.com/fastwego/wxwork-demo/contact"
 	"log"
 	"net/http"
 	"os"
@@ -12,9 +12,9 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/fastwego/wechat4work/corporation"
+	"github.com/fastwego/wxwork/corporation"
 
-	"github.com/fastwego/wechat4work/corporation/type/type_message"
+	"github.com/fastwego/wxwork/corporation/type/type_message"
 
 	"github.com/spf13/viper"
 
@@ -29,7 +29,7 @@ func init() {
 	viper.SetConfigFile(".env")
 	_ = viper.ReadInConfig()
 
-	Corp = corporation.New(corporation.CorporationConfig{Corpid: viper.GetString("CROPID")})
+	Corp = corporation.New(corporation.Config{Corpid: viper.GetString("CROPID")})
 	ContactApp = Corp.NewApp(corporation.AppConfig{
 		AgentId:        viper.GetString("AGENTID"),
 		Secret:         viper.GetString("SECRET"),
