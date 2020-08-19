@@ -1,6 +1,6 @@
 ## wxwork-demo 
 
-A demp project use fastwego/wxwork sdk
+A demo project use fastwego/wxwork sdk
 
 - checkout project `git clone https://github.com/fastwego/wxwork-demo.git`
 - install fastwego/wxwork `go get -u github.com/fastwego/wxwork`
