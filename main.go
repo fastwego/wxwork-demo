@@ -22,7 +22,7 @@ import (
 )
 
 var Corp *corporation.Corporation
-var ContactApp *corporation.App
+var App *corporation.App
 
 func init() {
 	// 加载配置文件
@@ -30,7 +30,7 @@ func init() {
 	_ = viper.ReadInConfig()
 
 	Corp = corporation.New(corporation.Config{Corpid: viper.GetString("CROPID")})
-	ContactApp = Corp.NewApp(corporation.AppConfig{
+	App = Corp.NewApp(corporation.AppConfig{
 		AgentId:        viper.GetString("AGENTID"),
 		Secret:         viper.GetString("SECRET"),
 		Token:          viper.GetString("TOKEN"),
@@ -40,7 +40,7 @@ func init() {
 
 func HandleMessage(c *gin.Context) {
 
-	message, err := ContactApp.Server.ParseXML(c.Request)
+	message, err := App.Server.ParseXML(c.Request)
 	if err != nil {
 		log.Println(err)
 	}
@@ -62,7 +62,7 @@ func HandleMessage(c *gin.Context) {
 		}
 	}
 
-	_ = ContactApp.Server.Response(c.Writer, c.Request, output)
+	_ = App.Server.Response(c.Writer, c.Request, output)
 }
 
 func main() {
@@ -71,7 +71,7 @@ func main() {
 	router.Use(gin.Logger(), gin.Recovery())
 
 	router.GET("/api/weixin/contact", func(c *gin.Context) {
-		ContactApp.Server.EchoStr(c.Writer, c.Request)
+		App.Server.EchoStr(c.Writer, c.Request)
 	})
 	router.POST("/api/weixin/contact", HandleMessage)
 
