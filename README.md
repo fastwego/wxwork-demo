@@ -15,3 +15,4 @@ A demo project for fastwego/wxwork
 ### use case demo
 
 - [github-webhook-bot](./github-webhook-bot/README.md)
+- [登录 & 活动报名](./login-app/README.md)
