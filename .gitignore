@@ -1,4 +1,5 @@
 .idea/
 .env
 wxwork-demo
+wxwork-webhook/
 .DS_Store

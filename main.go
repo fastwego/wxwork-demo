@@ -1,9 +1,21 @@
+// Copyright 2021 FastWeGo
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package main
 
 import (
 	"context"
-	"github.com/fastwego/wxwork-demo/calendar"
-	"github.com/fastwego/wxwork-demo/contact"
 	"log"
 	"net/http"
 	"os"
@@ -11,6 +23,10 @@ import (
 	"strconv"
 	"syscall"
 	"time"
+
+	"github.com/fastwego/wxwork-demo/calendar"
+	"github.com/fastwego/wxwork-demo/contact"
+	"github.com/fastwego/wxwork-demo/wedrive"
 
 	"github.com/fastwego/wxwork/corporation"
 
@@ -70,13 +86,14 @@ func main() {
 	router := gin.New()
 	router.Use(gin.Logger(), gin.Recovery())
 
-	router.GET("/api/weixin/contact", func(c *gin.Context) {
+	router.GET("/api/wxwork/contact", func(c *gin.Context) {
 		App.Server.EchoStr(c.Writer, c.Request)
 	})
-	router.POST("/api/weixin/contact", HandleMessage)
+	router.POST("/api/wxwork/contact", HandleMessage)
 
-	router.GET("/api/weixin/demo", contact.Demo)
-	router.GET("/api/weixin/calendar", calendar.Demo)
+	router.GET("/api/wxwork/demo", contact.Demo)
+	router.GET("/api/wxwork/calendar", calendar.Demo)
+	router.GET("/api/wxwork/wedrive", wedrive.Demo)
 
 	svr := &http.Server{
 		Addr:    viper.GetString("LISTEN"),
