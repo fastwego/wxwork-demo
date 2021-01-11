@@ -16,6 +16,7 @@ package main
 
 import (
 	"context"
+	"github.com/fastwego/wxwork-demo/material"
 	"log"
 	"net/http"
 	"os"
@@ -94,6 +95,7 @@ func main() {
 	router.GET("/api/wxwork/demo", contact.Demo)
 	router.GET("/api/wxwork/calendar", calendar.Demo)
 	router.GET("/api/wxwork/wedrive", wedrive.Demo)
+	router.GET("/api/wxwork/material", material.Demo)
 
 	svr := &http.Server{
 		Addr:    viper.GetString("LISTEN"),
